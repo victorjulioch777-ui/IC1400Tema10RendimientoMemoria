@@ -25,3 +25,6 @@
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+#PDF
+/main.pdf
