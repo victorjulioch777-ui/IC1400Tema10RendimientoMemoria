@@ -8,3 +8,9 @@ considerablemente, mientras que su latencia de acceso aleatorio ha
 disminuido de manera mucho más lenta. Esta diferencia contribuye al
 problema conocido como \textit{memory wall} y puede afectar directamente
 el rendimiento del procesador \cite{son2013reducing}.
+Una de las principales consecuencias de esta latencia en el procesador
+es la aparición de \textit{memory stalls}, producidos cuando la CPU debe
+esperar por accesos a niveles inferiores de la jerarquía de memoria.
+Park et al. muestran que una gestión coordinada de las frecuencias de la
+CPU, la caché externa y la interfaz de memoria puede reducir estos tiempos
+de espera y mejorar el rendimiento del sistema \cite{park2022dvfs}.
