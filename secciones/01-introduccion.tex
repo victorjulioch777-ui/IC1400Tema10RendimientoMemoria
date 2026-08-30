@@ -12,3 +12,31 @@ mucho menor. Esta diferencia contribuye a mantener una brecha de rendimiento
 entre el procesador y la memoria principal, provocando que el tiempo para
 acceder a los datos continúe siendo significativo en el rendimiento
 del sistema \cite{son2013reducing}.
+
+Una de las principales consecuencias de esta diferencia de velocidades es la 
+aparición de \textit{memory stalls}, durante los cuales el procesador debe 
+detener temporalmente la ejecución de intrucciones. Debido a esta relación,
+la latencia de acceso no solo constituye una característica propia de la 
+memoria, sino que también repercute directamente sobre métricas del rendimiento
+del procesador. Park et al. muestran que una gestión coordinada entre la CPU 
+y los diferentes niveles de la jerarquía de memoria puede reducir los ciclos 
+asociados a estas esperas \cite{park2022dvfs}.
+
+El análisis del rendimiento de una memoria tampoco puede limitarse a su ancho 
+de banda teórico. En sistemas basados en DDR4 existen retardos asociados con
+operaciones internas como los ciclos de refresco, activación y precarga. Estos
+factores pueden reducir el throughput que realmente puede aprovechar una aplicación.
+Shahbazi y Tsui demostraron experimentalmente esta diferencia al implementar 
+cuatro memorias DDR4-2400, donde esto alcanzo un throughput de 135.52~Gbps y 
+mejorar aproximadamente un 40\% el ancho de banda \cite{shahbazi2026ddr4}.
+
+Asimismo, el ancho de banda y la latencia deben estudiarse de manera conjunta.
+Esmaili-Dokht et al. caracterizan sistemas reales equipados con tecnologías
+DDR4, DDR5, HBM2, Y HBM2E mediante curvas de ancho de banda. Sus resultados
+muestran que la latencia de acceso varía conforme aumenta la presión sobre el
+sistema de memoria. Además, el rendimiento no depende exclusivamente de la
+tecnología DRAM, sino también de elementos como la jerarquía de caché, el 
+controlador de memoria y la arquitectura del procesador \cite{esmailidokht2024mess}.
+A partir de este contexto, el presente trabajo analiza el tiempo de acceso y el
+rendimiento de diferentes tecnologías y organizaciones de memoria, con énfasis
+en la relación entre latencia, ancho de banda y rendimiento del sistema.
