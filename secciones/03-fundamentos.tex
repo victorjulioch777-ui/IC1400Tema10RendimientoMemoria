@@ -3,14 +3,89 @@
 % ancho de banda y otras métricas necesarias para interpretar los resultados.
 
 % Redacción pendiente.
-La capacidad y el ancho de banda de las memorias DRAM han aumentado
-considerablemente, mientras que su latencia de acceso aleatorio ha
-disminuido de manera mucho más lenta. Esta diferencia contribuye al
-problema conocido como \textit{memory wall} y puede afectar directamente
-el rendimiento del procesador \cite{son2013reducing}.
-Una de las principales consecuencias de esta latencia en el procesador
-es la aparición de \textit{memory stalls}, producidos cuando la CPU debe
-esperar por accesos a niveles inferiores de la jerarquía de memoria.
-Park et al. muestran que una gestión coordinada de las frecuencias de la
-CPU, la caché externa y la interfaz de memoria puede reducir estos tiempos
-de espera y mejorar el rendimiento del sistema \cite{park2022dvfs}.
+\subsection{Jerarquía de memoria}
+
+La jerarquía de memoria busca reducir la diferencia de velocidad existente
+entre el procesador y la memoria principal mediante distintos niveles de 
+almacenamiento. Los niveles más cercanos al procesador proveen tiempos 
+de acceso menores, mientras que la memoria principal ofrece una mayor capacidad
+a costa de una latencia superior. Por esta razón, los sistemas modernos 
+usan la memoria caché para asi mantener cerca del procesador los datos \cite{son2013reducing}.
+
+Sin embargo, cuando los datos solicitados no se encuentran en los niveles
+superiores, es necesario acceder a niveles inferiores y, posteriormente, 
+a la memoria principal. Estos accesos pueden hacer periodos de espera en 
+la ejecución del procesador. Park et al. muestran que los diferentes niveles 
+de la jerarquía interactúan directamente con la CPU y que el nivel en el 
+cual se produce un retraso puede afectar el rendimiento global del sistema 
+\cite{park2022dvfs}.
+
+\subsection{Latencia y tiempo de acceso}
+
+La latencia de memoria representa el tiempo requerido para que una solicitud 
+de acceso produzca los datos necesarios para asi continuar la ejecución.
+En este trabajo, el tiempo de acceso se analiza a partir de esta latencia,
+debido a que se debe determinar la rapidez con la que la memoria responde
+a las solicitudes.
+
+La latencia de una memoria DRAM depende de diferentes operaciones internas.
+Entre ellas se encuentran la activación de filas, la precarga y los ciclos
+periódicos de refresco.Estos mecanismos pueden impedir temporalmente nuevos 
+accesos y aumentar el tiempo necesario para atender las solicitudes de memoria 
+\cite{shahbazi2026ddr4}.
+
+La latencia observada por el procesador tampoco depende únicamente del dispositivo
+DRAM. Esmaili-Dokht et al. señalan que la latencia \textit{load-to-use} incluye 
+también el tiempo que una solicitud permanece dentro del procesador, incluyendo 
+elementos como la jerarquía de caché y la interconexión interna del chip. Por eso,
+dos sistema que utilizan tecnología de memoria similar pueden presentar tiempos de 
+acceso distintos \cite{esmailidokht2024mess}.
+
+\subsection{Ancho de banda}
+
+El ancho de banda de memoria representa la cantidad de datos que puede
+transferirse durante un determinado intervalo de tiempo. Esta métrica permite
+evaluar la capacidad del sistema de memoria para atender grandes volúmenes de
+información.
+
+Debe distinguirse entre el ancho de banda teórico de una tecnología y el
+ancho de banda que puede alcanzarse en una implementación real. Operaciones
+como los ciclos de refresco, la activación y la precarga pueden reducir el
+throughput efectivo de una memoria DRAM. Con una implementación de cuatro memorias
+DDR4-2400, Shahbazi y Tsui muestran cómo estos retardos limitan el aprovechamiento 
+del ancho de banda \cite{shahbazi2026ddr4}. 
+
+\subsection{Relación entre latencia y ancho de banda}
+
+La latencia y el ancho de banda no son métricas independientes. Cuando la
+cantidad de solicitudes de memoria aumenta, también aumenta la utilización
+del ancho de banda disponible. Mientras el sistema se encuentra lejos de su
+punto de saturación, la latencia puede mantenerse relativamente estable; sin
+embargo, al aproximarse a la saturación, nuevas solicitudes generan mayor
+contención y pueden producir incrementos significativos en el tiempo de
+acceso \cite{esmailidokht2024mess}.
+
+Los resultados obtenidos mediante el benchmark Mess muestran además que la
+composición del tráfico influye sobre este comportamiento. El tráfico
+compuesto únicamente por lecturas alcanza, en general, menor latencia y mayor
+ancho de banda que configuraciones que incluyen escrituras, debido a las
+restricciones temporales adicionales asociadas a estas operaciones
+\cite{esmailidokht2024mess}.
+
+\subsection{Memory wall y memory stalls}
+
+La diferencia entre la velocidad de procesamiento y el tiempo necesario para
+acceder a la memoria constituye uno de los problemas fundamentales en el
+rendimiento de los sistemas computacionales. Aunque la capacidad y el ancho
+de banda de DRAM han mejorado considerablemente, su latencia de acceso
+aleatorio ha evolucionado de forma mucho más lenta, manteniendo la denominada
+\textit{memory wall} \cite{son2013reducing}.
+
+Una consecuencia de este problema son los \textit{memory stalls}, intervalos
+durante los cuales la CPU debe esperar la resolución de una operación de
+memoria antes de continuar procesando instrucciones. Estos periodos de espera
+afectan métricas como las instrucciones por ciclo (IPC). Park et al. reportan
+que una reducción de los ciclos de espera de memoria mediante una gestión
+coordinada de la CPU y la jerarquía de memoria produjo una reducción del
+26\% en los \textit{memory stalls per cycle} y un incremento del 11\% en IPC
+en su plataforma experimental \cite{park2022dvfs}.
