@@ -3,14 +3,16 @@
 % ancho de banda y otras métricas necesarias para interpretar los resultados.
 
 % Redacción pendiente.
-\subsection{Jerarquía de memoria}
+\subsubsection{Jerarquía de memoria}
 
 La jerarquía de memoria busca reducir la diferencia de velocidad existente
-entre el procesador y la memoria principal mediante distintos niveles de 
-almacenamiento. Los niveles más cercanos al procesador proveen tiempos 
-de acceso menores, mientras que la memoria principal ofrece una mayor capacidad
-a costa de una latencia superior. Por esta razón, los sistemas modernos 
-usan la memoria caché para asi mantener cerca del procesador los datos \cite{son2013reducing}.
+entre el procesador y la memoria principal mediante distintos niveles de
+almacenamiento. Los niveles más cercanos al procesador presentan menores
+tiempos de acceso, mientras que los niveles inferiores ofrecen una mayor
+capacidad a costa de una latencia superior. Por esta razón, los sistemas
+modernos utilizan memorias caché para atender parte de las solicitudes sin
+tener que acceder directamente a la memoria principal
+\cite{park2022dvfs}.
 
 Sin embargo, cuando los datos solicitados no se encuentran en los niveles
 superiores, es necesario acceder a niveles inferiores y, posteriormente, 
@@ -20,7 +22,7 @@ de la jerarquía interactúan directamente con la CPU y que el nivel en el
 cual se produce un retraso puede afectar el rendimiento global del sistema 
 \cite{park2022dvfs}.
 
-\subsection{Latencia y tiempo de acceso}
+\subsubsection{Latencia y tiempo de acceso}
 
 La latencia de memoria representa el tiempo requerido para que una solicitud 
 de acceso produzca los datos necesarios para asi continuar la ejecución.
@@ -41,7 +43,7 @@ elementos como la jerarquía de caché y la interconexión interna del chip. Por
 dos sistema que utilizan tecnología de memoria similar pueden presentar tiempos de 
 acceso distintos \cite{esmailidokht2024mess}.
 
-\subsection{Ancho de banda}
+\subsubsection{Ancho de banda}
 
 El ancho de banda de memoria representa la cantidad de datos que puede
 transferirse durante un determinado intervalo de tiempo. Esta métrica permite
@@ -55,7 +57,7 @@ throughput efectivo de una memoria DRAM. Con una implementación de cuatro memor
 DDR4-2400, Shahbazi y Tsui muestran cómo estos retardos limitan el aprovechamiento 
 del ancho de banda \cite{shahbazi2026ddr4}. 
 
-\subsection{Relación entre latencia y ancho de banda}
+\subsubsection{Relación entre latencia y ancho de banda}
 
 La latencia y el ancho de banda no son métricas independientes. Cuando la
 cantidad de solicitudes de memoria aumenta, también aumenta la utilización
@@ -72,14 +74,17 @@ ancho de banda que configuraciones que incluyen escrituras, debido a las
 restricciones temporales adicionales asociadas a estas operaciones
 \cite{esmailidokht2024mess}.
 
-\subsection{Memory wall y memory stalls}
+\subsubsection{Memory wall y memory stalls}
 
 La diferencia entre la velocidad de procesamiento y el tiempo necesario para
 acceder a la memoria constituye uno de los problemas fundamentales en el
-rendimiento de los sistemas computacionales. Aunque la capacidad y el ancho
-de banda de DRAM han mejorado considerablemente, su latencia de acceso
-aleatorio ha evolucionado de forma mucho más lenta, manteniendo la denominada
-\textit{memory wall} \cite{son2013reducing}.
+rendimiento de los sistemas computacionales. Alawneh et al. señalan que,
+a pesar de los avances en la arquitectura de los procesadores, la latencia
+de acceso a DRAM no ha disminuido significativamente durante las últimas
+décadas. En sistemas multinúcleo, además, la competencia entre varios núcleos
+por los bancos de memoria compartidos puede generar contención y aumentar
+los retrasos asociados con los accesos a memoria
+\cite{alawneh2023dram}.
 
 Una consecuencia de este problema son los \textit{memory stalls}, intervalos
 durante los cuales la CPU debe esperar la resolución de una operación de

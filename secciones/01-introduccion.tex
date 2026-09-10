@@ -3,15 +3,16 @@
 % y la pregunta de investigación.
 
 % Redacción pendiente.
-El rendimiento de los sistemas computacionales actuales no dependen solamente
+El rendimiento de los sistemas computacionales actuales no depende solamente
 de la capacidad de procesamiento de la CPU, sino también de la rapidez con la
-que la jerarquía de memoria puede suministrar los datos requeridos. Durante los
-últimos años, la capacidad y el ancho de banda de las memorias DRAM han 
-aumentado. Pero, la reducción de su latencia de acceso ha ocurrido a un ritmo
-mucho menor. Esta diferencia contribuye a mantener una brecha de rendimiento 
-entre el procesador y la memoria principal, provocando que el tiempo para
-acceder a los datos continúe siendo significativo en el rendimiento
-del sistema \cite{son2013reducing}.
+que la jerarquía de memoria puede suministrar los datos requeridos. A pesar de
+los avances en la arquitectura de los procesadores, la latencia de acceso a la
+memoria DRAM no ha disminuido significativamente en las últimas décadas, por
+lo que continúa representando un posible cuello de botella para el rendimiento
+del sistema. En arquitecturas multinúcleo, este problema puede intensificarse
+debido a la contención producida cuando varios núcleos intentan acceder de
+forma simultánea a bancos de memoria compartidos
+\cite{alawneh2023dram}.
 
 Una de las principales consecuencias de esta diferencia de velocidades es la 
 aparición de \textit{memory stalls}, durante los cuales el procesador debe 

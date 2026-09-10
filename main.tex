@@ -1,8 +1,54 @@
-\documentclass[conference]{IEEEtran}
+\documentclass[12pt]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage[spanish,es-nodecimaldot]{babel}
+
+\usepackage{fontspec}
+
+\setmainfont{Arial}
+
+\usepackage[
+    top=2.54cm,
+    bottom=2.54cm,
+    left=2.54cm,
+    right=2.54cm
+]{geometry}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{ragged2e}
+\justifying
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\bfseries\fontsize{14}{16}\selectfont}
+  {\thesection.}
+  {0.5em}
+  {}
+
+\titleformat{\subsection}
+  {\bfseries\fontsize{14}{16}\selectfont}
+  {\thesubsection.}
+  {0.5em}
+  {}
+
+\titleformat{\subsubsection}
+  {\bfseries\fontsize{14}{16}\selectfont}
+  {\thesubsubsection.}
+  {0.5em}
+  {}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
 \usepackage{cite}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
@@ -12,53 +58,72 @@
 
 \begin{document}
 
-\title{Análisis del Tiempo de Acceso y Rendimiento de Diferentes Tecnologías de Memoria}
+\begin{center}
 
-\author{
-\IEEEauthorblockN{Víctor Julio Chavarría Ordoñez, Luiz Fernando Mendoza Contreras, Harold Philippe Umaña Pacheco}
-\IEEEauthorblockA{
-\textit{Escuela de Computación} \\
-\textit{Ingeniería en Computación} \\
-\textit{Tecnológico de Costa Rica} \\
-Costa Rica
-}
+{\fontsize{16}{18}\selectfont
+\textbf{Análisis del Tiempo de Acceso y Rendimiento de Diferentes Tecnologías de Memoria}
 }
 
-\maketitle
+\vspace{1cm}
 
-\begin{abstract}
+\textbf{Tecnológico de Costa Rica} \\
+Escuela de Computación \\
+Fundamentos de Organización de Computadoras \\
+
+\vspace{0.5cm}
+
+Víctor Julio Chavarría Ordoñez \\
+Luiz Fernando Mendoza Contreras \\
+Harold Philippe Umaña Pacheco \\
+
+\vspace{0.5cm}
+
+II Semestre 2026 \\
+Fecha: 21 de setiembre de 2026
+
+\end{center}
+
+\vspace{1cm}
+
+\section*{Abstract}
 \input{secciones/00-abstract}
-\end{abstract}
 
-\begin{IEEEkeywords}
+\textbf{Keywords:}
 memory, latency, bandwidth, access time, memory hierarchy, performance
-\end{IEEEkeywords}
 
 \section{Introducción}
 \input{secciones/01-introduccion}
 
+\section{Justificación}
+\input{secciones/02-justificacion}
+
 \section{Metodología}
-\input{secciones/02-metodologia}
+\input{secciones/03-metodologia}
 
-\section{Fundamentos}
-\input{secciones/03-fundamentos}
+\section{Marco conceptual}
 
-\section{Tecnologías de memoria}
-\input{secciones/04-tecnologias}
+\subsection{Fundamentos}
+\input{secciones/04-fundamentos}
 
-\section{Comparación de rendimiento}
-\input{secciones/05-comparacion}
+\subsection{Tecnologías de memoria}
+\input{secciones/05-tecnologias}
 
 \section{Estado del arte}
-\input{secciones/06-estado-del-arte}
 
-\section{Análisis y discusión}
-\input{secciones/07-discusion}
+\subsection{Comparación de rendimiento}
+\input{secciones/06-comparacion}
 
-\section{Conclusiones}
-\input{secciones/08-conclusiones}
+\subsection{Investigaciones recientes}
+\input{secciones/07-estado-del-arte}
 
-% La bibliografía se habilitará cuando existan referencias citadas en el texto.
+\subsection{Análisis y discusión}
+\input{secciones/08-discusion}
+
+\section{Conclusiones preliminares}
+\input{secciones/09-conclusiones}
+
+\renewcommand{\refname}{Referencias bibliográficas}
+
 \bibliographystyle{IEEEtran}
 \bibliography{referencias}
 
