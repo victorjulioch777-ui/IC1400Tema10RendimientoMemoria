@@ -12,6 +12,7 @@
 *.toc
 *.lof
 *.lot
+*.xdv
 
 # Temporales / backups
 *.bak
