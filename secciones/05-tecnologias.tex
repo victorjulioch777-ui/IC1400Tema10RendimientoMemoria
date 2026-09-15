@@ -4,6 +4,44 @@
 
 % Redacción pendiente.
 \subsubsection{Memoria DRAM}
+La memoria dinámica de acceso aleatorio (DRAM) constituye la base de la
+memoria principal utilizada en la mayoría de los sistemas computacionales.
+Su funcionamiento requiere operaciones periódicas de refresco para conservar
+la información almacenada, y su rendimiento se encuentra condicionado por
+factores como la organización interna de bancos, los tiempos de activación y
+la competencia entre solicitudes de memoria \cite{alawneh2023dram}. Estas
+características influyen directamente en la latencia y en el ancho de banda
+que puede alcanzar el sistema.
 \subsubsection{DDR4}
+DDR4 es una tecnología de memoria DRAM ampliamente utilizada en computadoras
+y servidores. Su rendimiento depende no solamente de la velocidad de
+transferencia especificada, sino también del controlador de memoria y de la
+forma en que se organizan los accesos. Estudios recientes muestran que DDR4
+continúa siendo competitiva en cargas de trabajo sensibles a la latencia
+\cite{steiner2022dramsys}. Además, mediante una mejor utilización del
+controlador de memoria es posible aumentar considerablemente su ancho de banda
+efectivo \cite{shahbazi2026ddr4}.
 \subsubsection{DDR5}
+DDR5 representa una evolución de DDR4 orientada principalmente a incrementar
+la capacidad y el ancho de banda disponible. Entre sus cambios se encuentran
+una mayor cantidad de bancos y una organización que permite incrementar el
+paralelismo de los accesos a memoria \cite{steiner2022dramsys}. Implementaciones
+recientes de DDR5 han alcanzado velocidades de hasta 8.0 Gb/s por pin,
+demostrando el aumento de las tasas de transferencia disponibles en las nuevas
+generaciones de DRAM \cite{choi2024ddr5}. Sin embargo, un mayor ancho de banda
+no implica necesariamente una reducción equivalente de la latencia.
 \subsubsection{Memorias de alto ancho de banda}
+Las memorias de alto ancho de banda (HBM) están diseñadas para proporcionar
+una gran cantidad de datos al procesador en aplicaciones que realizan numerosas
+operaciones en paralelo. Son utilizadas principalmente en sistemas de alto
+rendimiento, aceleradores y cargas de trabajo que requieren transferir grandes
+volúmenes de información. En sistemas como la supercomputadora Aurora, HBM ha
+mostrado un ancho de banda considerablemente superior al obtenido con DDR,
+aunque con una latencia mayor en determinadas configuraciones
+\cite{ibeid2025aurora}.
+
+El rendimiento efectivo de HBM también depende de la forma en que la memoria
+es utilizada. Huang et al., mediante la herramienta Shuhai, analizaron el
+comportamiento de HBM en sistemas basados en FPGA y mostraron la importancia
+de considerar su rendimiento real y sus patrones de acceso, además de sus
+especificaciones teóricas \cite{huang2022shuhai}.

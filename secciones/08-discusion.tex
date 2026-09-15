@@ -14,9 +14,13 @@ Además, el rendimiento observado depende tanto de la memoria como de la
 arquitectura del sistema. Esmaili-Dokht et al. muestran que sistemas que
 utilizan una misma tecnología de memoria pueden presentar diferencias
 importantes de latencia debido a factores como la jerarquía de caché, la
-interconexión y la microarquitectura \cite{esmailidokht2024mess}. De forma
-similar, las restricciones internas y el controlador de memoria pueden limitar
-el aprovechamiento del ancho de banda disponible \cite{eyerman2022dram}.
+interconexión y la microarquitectura \cite{esmailidokht2024mess}. De manera
+similar, Velten et al. muestran que la organización de la jerarquía de memoria,
+la ubicación de los datos y las características de acceso local o remoto pueden
+producir diferencias importantes en latencia y ancho de banda en sistemas de
+servidores \cite{velten2022memory}. Las restricciones internas y el controlador
+de memoria también pueden limitar el aprovechamiento del ancho de banda
+disponible \cite{eyerman2022dram}.
 
 En conjunto, los artículos revisados indican que no existe una tecnología de
 memoria que presente el mejor rendimiento en todas las situaciones. Algunas
@@ -25,3 +29,16 @@ mientras que otras dependen más de reducir los tiempos de acceso. Por ello, la
 evaluación de una tecnología de memoria debe considerar conjuntamente la
 latencia, el ancho de banda y las características de la arquitectura donde será
 utilizada.
+
+Al comparar estas tecnologías, también se observa que la evolución
+de DDR4 y DDR5 está orientada principalmente a aumentar la capacidad de 
+transferencia. DDR5 puede ofrecer mayor ancho de banda gracias a cambios 
+en su organización y a velocidades de transferencia más elevadas 
+\cite{steiner2022dramsys,choi2024ddr5}. Sin embargo, esto no significa
+que DDR4 deje de ser competitiva, ya que determinadas cargas sensibles a 
+la latencia pueden obtener resultados favorables con esta tecnología 
+\cite{steiner2022dramsys}. Trabajos como el de Shahbazi y Tsui muestran que 
+una mejor organización del controlador puede mejorar notablemente el 
+rendimiento de DDR4, incluso sin cambiar la memoria en sí \cite{shahbazi2026ddr4}. 
+Esto confirma que el rendimiento final depende tanto de la generación de memoria 
+como de su integración y gestión en el sistema.
