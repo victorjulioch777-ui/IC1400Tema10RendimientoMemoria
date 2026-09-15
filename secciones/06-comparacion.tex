@@ -3,3 +3,139 @@
 % acceso y demás métricas reportadas por los artículos seleccionados.
 
 % Redacción pendiente.
+\subsubsection{HBM frente a DDR en la supercomputadora Aurora}
+
+Intel y el Laboratorio Nacional Argonne pusieron a prueba, dentro de la supercomputadora Aurora,
+los dos tipos de memoria que conviven en sus nodos de cómputo: la memoria de alto ancho de
+banda (HBM) integrada en el procesador Xeon Max, y la DDR tradicional del mismo sistema. El
+benchmark que usaron, STREAM Triad, midió el ancho de banda sostenido bajo distintas
+combinaciones de clustering (Quad y SNC4) y modos de memoria (Flat y Cache). Con socket
+completo en modo SNC4, HBM llegó a 840 GB/s, más del triple de los 245 GB/s que alcanzó
+DDR \cite{ibeid2025aurora}. Pero la historia cambia con la latencia: al medirla sin carga usando Intel
+Memory Latency Checker, DDR resultó más rápida en todas las configuraciones probadas, con
+una ventaja de más del 10\% en modo SNC4. La conclusión de los autores es simple pero útil: ni
+HBM ni DDR ganan en todo, así que la mejor opción depende de si la aplicación necesita más
+ancho de banda o menos latencia.
+
+\subsubsection{El marco Mess: una vista unificada del sistema de memoria}
+
+Esmaili-Dokht y su equipo ---trabajo que quedó como finalista al mejor artículo en MICRO 2024
+--- construyeron algo distinto a lo habitual: en vez de reportar un solo número de latencia o ancho
+de banda, propusieron caracterizar la memoria con curvas completas de ancho de banda contra
+latencia, a las que llamaron framework Mess. Corrieron su benchmark sobre servidores reales de
+Intel, AMD, IBM, Fujitsu y Amazon, además de GPUs NVIDIA, cubriendo DDR4, DDR5, HBM2
+y HBM2E. Un dato llamativo: dos servidores con la misma memoria DDR4 pueden tener latencias
+muy distintas. Uno con arquitectura Cascade Lake midió 85 ns sin carga, mientras que otro con
+Zen2 ---también DDR4, con temporizaciones casi idénticas--- llegó a casi 30 ns más
+\cite{esmailidokht2024mess}. Esto deja claro que la latencia no depende solo del chip de memoria, sino de
+toda la microarquitectura que lo rodea: caché, interconexión, número de núcleos. Además, algo
+útil para el resto del grupo: los autores probaron que simuladores tan usados como gem5 no logran
+replicar bien estos comportamientos reales, así que conviene tener cuidado si en algún momento
+se citan resultados de simulación en vez de mediciones directas.
+
+\subsubsection{Memoria heterogénea con enlaces de coherencia de caché: CXL, NVLink-C2C e Infinity Fabric}
+
+Con la llegada de CXL, NVLink-C2C e Infinity Fabric, la memoria dejó de limitarse a los canales
+DIMM de siempre, y eso es justo lo que investigó este grupo de UC San Diego con su banco de
+pruebas Heimdall. Probaron diez tipos de servidores distintos combinando CPUs de varios
+fabricantes con DDR5 DIMM, LPDDR5x, HBM3, HBM3e y memoria expandida vía CXL. Los
+sistemas DDR5 de cuatro canales saturan su ancho de banda cerca de 107 GiB/s; con ocho canales,
+la cifra sube considerablemente antes de que la latencia empiece a dispararse
+\cite{wang2024hitchhiker}. Lo más interesante para esta comparación es el costo de usar CXL: un acceso remoto vía este
+protocolo puede ser entre 50\% y 300\% más lento que un acceso local a DIMM. En números
+concretos, mientras la DRAM local ronda los 100 ns, un dispositivo CXL basado en ASIC se
+mueve entre 200 y 300 ns, y los prototipos FPGA llegan hasta 400 ns. Este artículo aporta justo lo
+que le faltaba a los otros dos: tecnologías de memoria de última generación ---HBM3, HBM3e,
+CXL--- con números concretos de cuánto cuesta, en latencia, expandir la memoria más allá de lo
+tradicional.
+
+\subsubsection{Controlador de memoria híbrido con eDRAM y MRAM para Big Data}
+
+El cuarto artículo cambia de enfoque: en vez de medir memoria principal a nivel de sistema
+completo, se mete en el diseño del controlador de memoria mismo. Fue presentado en SARTECO
+2023, el congreso anual de la Sociedad Española de Arquitectura y Tecnología de Computadores,
+por un equipo de la Universitat Politècnica de València. El problema que atacan es conocido: la
+memoria no volátil (NVRAM) ofrece mucha más capacidad que la DRAM, pero paga esa
+capacidad con latencias de acceso mayores. La solución que proponen es añadir una segunda
+caché, más densa que la SRAM habitual, construida con eDRAM o MRAM, que absorbe los fallos
+antes de que lleguen a NVRAM. Simulando cargas de trabajo típicas de Big Data, el esquema con
+eDRAM bajó la penalización por fallo hasta un 50\%, y el de MRAM hasta un 80\%; a nivel de
+sistema completo eso se tradujo en mejoras de rendimiento de 15\% y 23\% respectivamente
+\cite{lurbe2023controlador}. Sirve porque es el único de los cuatro que no habla de una tecnología de memoria ya
+establecida en el mercado, sino de cómo diseñar la jerarquía de caché para tecnologías que todavía
+están emergiendo.
+
+\subsubsection{Comparación cuantitativa}
+
+La siguiente tabla resume los valores numéricos más relevantes reportados en los cuatro artículos,
+organizados por tecnología y tipo de medición.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{4.2cm} p{3cm} p{3cm} p{3.2cm}}
+\toprule
+\textbf{Tecnología / configuración} &
+\textbf{Ancho de banda medido} &
+\textbf{Latencia medida} &
+\textbf{Fuente} \\
+\midrule
+
+HBM (Xeon Max, modo SNC4) &
+840 GB/s &
+$\sim$121 ns (idle) &
+Ibeid et al. (2025) \\
+
+DDR (Xeon Max, modo SNC4) &
+245 GB/s &
+$\sim$96 ns (idle) &
+Ibeid et al. (2025) \\
+
+DDR4 (servidor Cascade Lake) &
+--- &
+85 ns (sin carga) &
+Esmaili-Dokht et al. (2024) \\
+
+DDR5 (Graviton 3) &
+--- &
+129 ns (sin carga) &
+Esmaili-Dokht et al. (2024) \\
+
+HBM2 (A64FX) &
+--- &
+122 ns (sin carga) &
+Esmaili-Dokht et al. (2024) \\
+
+DDR5 DIMM (4 canales, punto de saturación) &
+107 GiB/s &
+--- &
+Wang et al. (2024) \\
+
+Memoria CXL remota (ASIC) vs. DIMM local &
+--- &
+200--300 ns vs. $\sim$100 ns &
+Wang et al. (2024) \\
+
+Caché híbrida eDRAM/MRAM vs. SRAM sola &
+--- &
+$-50\%$ a $-80\%$ en penalización por fallo &
+Lurbe et al. (2023) \\
+
+\bottomrule
+\end{tabular}
+\caption{Comparación cuantitativa de tecnologías y configuraciones de memoria.}
+\label{tab:comparacion-memoria}
+\end{table}
+
+Viendo estos números juntos, se repite una misma idea en los cuatro artículos: no existe una
+memoria que gane en ancho de banda y en latencia al mismo tiempo. HBM y sus variantes se
+llevan la ventaja en ancho de banda ---algo clave para cargas de trabajo muy paralelas, como HPC
+o entrenamiento de modelos de IA--- pero pierden entre 10\% y 20\% de latencia frente a DDR
+\cite{ibeid2025aurora,esmailidokht2024mess}. Salir de los canales DIMM tradicionales también
+tiene un precio, sea por CXL o por una jerarquía de caché adicional: CXL suma entre 100 ns y 300
+ns sobre un acceso local \cite{wang2024hitchhiker}, mientras que las cachés híbridas con eDRAM o
+MRAM hacen justo lo contrario, intentan esconder la latencia de la NVRAM a cambio de un
+controlador de memoria más complejo \cite{lurbe2023controlador}. Y algo que vale la pena recordar: la
+latencia real que se mide en un sistema depende tanto de la memoria como de todo lo que la rodea
+---caché, interconexión, cantidad de núcleos---, razón por la cual dos servidores con la misma
+DDR4 pueden diferir en casi 30 ns \cite{esmailidokht2024mess}.

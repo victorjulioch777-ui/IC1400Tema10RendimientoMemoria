@@ -3,3 +3,17 @@
 % identificados en los artículos seleccionados.
 
 % Redacción pendiente.
+En conjunto, estos cuatro artículos cubren tanto memoria principal ya consolidada ---DDR4,
+DDR5, HBM, HBM2, HBM3--- como tecnologías más nuevas de expansión y caché de memoria
+---CXL, eDRAM, MRAM---, todos con datos medidos en hardware o en simulación detallada, y
+todos publicados entre 2023 y 2025. Esa tensión entre ancho de banda y latencia que aparece una
+y otra vez, junto con el costo que implica salir de los canales DIMM convencionales, es la
+evidencia que este bloque aporta al análisis comparativo del grupo.
+De manera complementaria, Eyerman et al. proponen analizar el comportamiento
+de la memoria DRAM mediante \textit{bandwidth stacks} y \textit{latency stacks},
+con el objetivo de identificar las causas que limitan el aprovechamiento del
+ancho de banda y aumentan la latencia. Su trabajo muestra que el rendimiento
+real de DRAM está condicionado por restricciones temporales, paralelismo interno
+y esperas en el controlador de memoria, por lo que las especificaciones teóricas
+no representan necesariamente el comportamiento observado en una aplicación
+\cite{eyerman2022dram}.
