@@ -3,3 +3,25 @@
 % discutir diferencias entre estudios y relacionar los hallazgos con IC-1400.
 
 % Redacción pendiente.
+Los resultados analizados muestran que el rendimiento de una memoria no puede
+evaluarse utilizando únicamente una característica. Existe un compromiso entre
+latencia y ancho de banda, ya que tecnologías como HBM pueden proporcionar un
+ancho de banda considerablemente mayor que DDR, pero no necesariamente una
+menor latencia \cite{ibeid2025aurora}. Por esta razón, la tecnología más
+adecuada depende de las necesidades y del patrón de acceso de cada aplicación.
+
+Además, el rendimiento observado depende tanto de la memoria como de la
+arquitectura del sistema. Esmaili-Dokht et al. muestran que sistemas que
+utilizan una misma tecnología de memoria pueden presentar diferencias
+importantes de latencia debido a factores como la jerarquía de caché, la
+interconexión y la microarquitectura \cite{esmailidokht2024mess}. De forma
+similar, las restricciones internas y el controlador de memoria pueden limitar
+el aprovechamiento del ancho de banda disponible \cite{eyerman2022dram}.
+
+En conjunto, los artículos revisados indican que no existe una tecnología de
+memoria que presente el mejor rendimiento en todas las situaciones. Algunas
+aplicaciones pueden beneficiarse principalmente de un mayor ancho de banda,
+mientras que otras dependen más de reducir los tiempos de acceso. Por ello, la
+evaluación de una tecnología de memoria debe considerar conjuntamente la
+latencia, el ancho de banda y las características de la arquitectura donde será
+utilizada.
